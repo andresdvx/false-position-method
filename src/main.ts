@@ -1,4 +1,4 @@
-import './style.css'
+import './resset.css'
 import './index.css'
 import { formTemplate } from './templates/form.template'
 import { onSubmit, addSymbol, clearFunction, clearLastSymbol } from './calcular';
