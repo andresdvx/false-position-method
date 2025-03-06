@@ -3,9 +3,9 @@ import { evaluate, abs } from "mathjs";
 export const addSymbol = (simbolo: string) => {
   const funcionInput = document.getElementById("funcion");
   if (funcionInput) (funcionInput as HTMLInputElement).value += simbolo;
-}
+};
 
-export const clearFunction = ()=> {
+export const clearFunction = () => {
   const funcionInput = document.getElementById("funcion");
   const resultText = document.getElementById("resultado-texto");
   const a = document.getElementById("a");
@@ -15,20 +15,17 @@ export const clearFunction = ()=> {
   (resultText as HTMLElement).textContent = "";
   (a as HTMLInputElement).value = "";
   (b as HTMLInputElement).value = "";
-}
+};
 
-export const clearLastSymbol = ()=>{
+export const clearLastSymbol = () => {
   const funcionInput = document.getElementById("funcion");
   if (funcionInput) {
     const currentFunction = (funcionInput as HTMLInputElement).value;
     (funcionInput as HTMLInputElement).value = currentFunction.slice(0, -1);
   }
-}
+};
 
-export const onSubmit = (e: Event) => {
-  e.preventDefault();
-  const resultText = document.getElementById("resultado-texto");
-
+const getValueInputs = () => {
   // Obtener los elementos
   let inputFunction = document.getElementById("funcion");
   let inputA = document.getElementById("a");
@@ -42,6 +39,25 @@ export const onSubmit = (e: Event) => {
   let b = parseFloat((inputB as HTMLInputElement).value);
   const tolerance = parseFloat((inputTolerance as HTMLInputElement).value);
   const maxIter = parseInt((inputMaxIteraction as HTMLInputElement).value);
+
+  return { funct, a, b, tolerance, maxIter };
+};
+
+const validateValueFunction = ()=>{
+  const {funct} = getValueInputs();
+  return funct !== '';
+}
+
+export const onSubmit = (e: Event) => {
+  e.preventDefault();
+  const resultText = document.getElementById("resultado-texto");
+
+  let { funct, a, b, tolerance, maxIter } = getValueInputs();
+
+  if(!validateValueFunction()){
+    alert("La función no puede estar vacía.");
+    return;
+  };
 
   // Definir la función a partir de la entrada del usuario
   let f = (x: number) => {
@@ -59,7 +75,7 @@ export const onSubmit = (e: Event) => {
   try {
     fa = f(a);
     fb = f(b);
-  } catch (error : any) {
+  } catch (error: any) {
     alert(error.message);
     return;
   }
