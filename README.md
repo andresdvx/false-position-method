@@ -40,11 +40,6 @@ const f = (x: number) => Math.pow(x, 2) - 4; // Example function: f(x) = x^2 - 4
 const root = falsePosition(f, 0, 3);
 console.log("Root found:", root);
 ```
-
-## File Structure
-- **`src/`**: Contains the TypeScript implementation of the False Position Method.
-- **`public/`**: Contains the HTML and CSS files for the frontend interface.
-
 ## Contributing
 Contributions are welcome! Please follow these steps:
 1. Fork the repository.
